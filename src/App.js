@@ -1,5 +1,7 @@
 import Blog from './components/Blog'
+import BlogForm from './components/BlogForm'
 import blogService from './services/blogs'
+import LoginForm from './components/LoginForm'
 import loginService from './services/login'
 import Notification from './components/Notification'
 import React from 'react'
@@ -110,72 +112,17 @@ class App extends React.Component {
   }
 
   render() {
-    const loginForm = () => (
-      <div>
-        <h2>log in to application</h2>
-        <form onSubmit={this.login}>
-          <div>
-            username:
-            <input
-              type="text"
-              value={this.state.username}
-              onChange={this.handleUsernameChange}
-            />
-          </div>
-          <div>
-            password:
-            <input
-              type="password"
-              value={this.state.password}
-              onChange={this.handlePasswordChange}
-            />
-          </div>
-          <button type="submit">login</button>
-        </form>
-      </div>
-    )
-
-    const blogForm = () => (
-      <div>
-        <h3>create new</h3>
-    
-        <form onSubmit={this.addBlog}>
-          <div>
-            title
-            <input
-              type="text"
-              value={this.state.title}
-              onChange={this.handleTitleChange}
-            />
-          </div>
-          <div>
-            author
-            <input
-              type="text"
-              value={this.state.author}
-              onChange={this.handleAuthorChange}
-            />
-          </div>
-          <div>
-            url
-            <input
-              type="text"
-              value={this.state.url}
-              onChange={this.handleUrlChange}
-            />
-          </div>
-          <button type="submit">create</button>
-        </form>
-      </div>
-    )
-
     if (this.state.user === null) {
       return (
         <div>
           <Notification message={this.state.message} error={this.state.error} />
-          <div>
-            {loginForm()}
-          </div>
+          <LoginForm
+            handlePasswordChange={this.handlePasswordChange}
+            handleUsernameChange={this.handleUsernameChange}
+            login={this.login}
+            password={this.state.password}
+            username={this.state.username}
+          />
         </div>
       )
     }
@@ -188,9 +135,15 @@ class App extends React.Component {
           {this.state.user.name} logged in 
           <button type='button' onClick={this.logout}>logout</button>
         </p>
-        <div>
-          {blogForm()}
-        </div>
+        <BlogForm
+          addBlog={this.addBlog}
+          author={this.state.author}
+          handleAuthorChange={this.handleAuthorChange}
+          handleTitleChange={this.handleTitleChange}
+          handleUrlChange={this.handleUrlChange}
+          title={this.state.title}
+          url={this.state.url}
+        />
         {this.state.blogs.map(blog => 
           <Blog key={blog._id} blog={blog}/>
         )}
