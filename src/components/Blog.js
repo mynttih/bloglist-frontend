@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 class Blog extends React.Component {
@@ -42,3 +43,10 @@ class Blog extends React.Component {
 }
 
 export default Blog
+
+Blog.propTypes = {
+  addLike: PropTypes.func.isRequired,
+  blog: PropTypes.object.isRequired,
+  deleteBlog: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
+}

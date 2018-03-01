@@ -8,7 +8,7 @@ const LoginForm = (props) => {
     const username = props.username
 
     return (
-        <div>
+        <div className="loginForm">
             <h2>log in to application</h2>
             <form onSubmit={login}>
                 <div>

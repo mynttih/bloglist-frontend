@@ -8,7 +8,7 @@ const SortedBlogList = (props) => {
     const user = props.user
 
     return (
-        <div>
+        <div className="blogList">
             {sortedBlogs.map(blog => 
                 <Blog
                     key={blog._id}
